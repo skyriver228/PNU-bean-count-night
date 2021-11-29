@@ -54,9 +54,37 @@ scipy==1.6.3
 ----------
 ## 3. Algorithm Flow
 ### 3.1. Preprocessing
+- rgb 데이터는 사용하기에 너무 무거우며, 현재 대회에서는 CNN과 같은 부분의 사용이 하드웨어 리소스, 사용가능 라이브러리면에서 제한적이므로 전처리 과정을 통해 필요한 부분만을 가져온다. 
+- 전체적인 전처리 과정을 통한 결과물은 아래와 같다. 
+    1. rgb img
+    2. binary img
+    3. count and area data
 #### 3.1.1. Get target img
+> BeanCount.getImgPath(self, path: str) -> img_paths: List[str]  
+
+[img]
+- 모든 부분을 사용할 필요는 없으며, 외부에 보이는 환경에 "원"으로 볼 수 있는 요소가 있으므로 필요부분(target)만을 잘라내 준다. 
 #### 3.1.2. RGB2Binary
+- 크게 2가지 방법을 사용하여 2가지 다른 데이터를 얻어서 사용하고자 한다.   
+
+👉 edge detection
+> edgeRGB2Binary(self, rgb_img: nd.array()) -> edge_bi_img: nd.array() 
+- edge detection을 활용하여 rgb → binary 를 진행한다. 
+> circleCount(self, egde_bi_img: nd.array()) -> num: int
+- edge detection 결과물인 binary img를 활용하여 binary → circle count를 진행한다. 
+
+[img]
+
+👉 hsv
+> hsvRGB2Binary(self, rgb_img: nd.array()) -> hsv_bi_img: nd.array() 
+- hsv를 활용하여 rgb → binary 를 진행한다. 
+> areaCount(self, hsv_bi_img: nd.array()) -> area: int
+- hsv 결과물인 binary img를 활용하여 binary → area counting(white space = bean space)를 진행한다. 
+
+[img]
+
 #### 3.1.3. Erasing Noise
+>erasingNoise(self, ~_bi_img: nd.array()) -> ~_bi_img: nd.array()
 ### 3.2. Evaluate Preprocessed Output
 #### 3.2.1. Selecting && Concating Output
 ### 3.2. Building Model
@@ -83,10 +111,12 @@ Class BeanCount
 │       └── get cutted picture only with target
 ├── edgeRGB2Binary(self, rgb_img: nd.array()) -> edge_bi_img: nd.array()
 │       └── get binary img by edge detection 
-├── circleCount(self, egde_bi_img: nd.array()) -> num: int
-│       └── get counted circle(pea)'s number by edge detected binary img and add to res_df
 ├── hsvRGB2Binary(self, rgb_img: nd.array()) -> hsv_bi_img: nd.array()
 │       └── get binary img by hsv 
+├── erasingNoise(self, ~_bi_img: nd.array()) -> ~_bi_img: nd.array()
+│       └── erase noise of binary img of output(edgeRGB2Binary, hsvRGB2Binary) by using morphology
+├── circleCount(self, egde_bi_img: nd.array()) -> num: int
+│       └── get counted circle(pea)'s number by edge detected binary img and add to res_df
 ├── areaCount(self, hsv_bi_img: nd.array()) -> area: int
 │       └── get counted circle(pea)'s area by binary img converted by hsv and add to res_df
 ├── bulidingModel(self, self.res_df: pd.DataFrame) -> self.res_df: pd.DataFrame, model: ?
