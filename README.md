@@ -26,7 +26,7 @@
 <code>matplotlib==3.4.0  
 numpy==1.20.3  
 opencv-python==3.4.15.55  
-scipy==1.6.3  
+scipy==1.7.3  
 </code></pre>
 
 ### 1.2. 제한
