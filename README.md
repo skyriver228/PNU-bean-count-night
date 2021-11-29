@@ -11,7 +11,7 @@
 
 ---------
 ## 목차
-1. [환경](#2-환경)
+1. [환경](#1-환경)
 2. [파일 구조](#2-파일-구조)
 3. [Algorithm Flow](#3-Algorithm-Flow)
 4. [Code Structure](#4-Code-Structure)
