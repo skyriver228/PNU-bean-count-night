@@ -6,8 +6,8 @@
     👉 output: 담겨져 있는 콩의 개수
 
 - team PongPongLab
-    - [성강(skyriver)](!https://github.com/skyriver228)
-    - [송주현(izen1231)](!https://github.com/izen1231)
+    - [성강(skyriver)](https://github.com/skyriver228)
+    - [송주현(izen1231)](https://github.com/izen1231)
 
 ---------
 ## 목차
