@@ -85,7 +85,13 @@ scipy==1.6.3
 
 #### 3.1.3. Erasing Noise
 >erasingNoise(self, ~_bi_img: nd.array()) -> ~_bi_img: nd.array()
+- molophology(열기) 연산: 침식 -> 팽창 으로 노이즈를 제거한다.
+    - 작은 돌기,작은 객체가 사라지고 얇은 연결선이 끊어진다.
+
+[img]
+
 ### 3.2. Evaluate Preprocessed Output
+- 3.1.2. RGB2Binary의 결과물들 count, area에 해당하는 데이터들을 res_df
 #### 3.2.1. Selecting && Concating Output
 ### 3.2. Building Model
 ### 3.3. Evaluate Model
