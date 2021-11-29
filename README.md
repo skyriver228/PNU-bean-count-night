@@ -100,7 +100,7 @@ scipy==1.6.3
 - 
 ### 3.4. Running && Evaluate Model
 ----------
-## 3. Code Structure
+## 4. Code Structure
 <pre>
 <code>
 Class BeanCount
