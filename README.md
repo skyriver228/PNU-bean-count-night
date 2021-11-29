@@ -13,7 +13,8 @@
 ## 목차
 1. [환경](#2-환경)
 2. [파일 구조](#2-파일-구조)
-3. [algorithm flow](#3-algorithm-flow)
+3. [Algorithm Flow](#3-Algorithm-Flow)
+4. [Code Structure](#4-Code-Structure)
 -----------
 ## 1. 환경
 👉 OS : Windows 10  
@@ -51,13 +52,38 @@ scipy==1.6.3
               └── main.py
 </code></pre>
 ----------
-## 3. algorithm flow
+## 3. Algorithm Flow
 ### 3.1. Preprocessing
-#### 3.1.1. Get target
+#### 3.1.1. Get target img
 #### 3.1.2. RGB2Binary
 #### 3.1.3. Erasing Noise
 ### 3.2. Evaluate Preprocessed Output
 #### 3.2.1. Selecting && Concating Output
 ### 3.2. Building Model
 ### 3.3. Evaluate Model
- 
+----------
+## 3. Code Structure
+<pre>
+<code>
+Class BeanCount
+├── __init__(self, path: str)       
+│       └── input pictures' folder path
+├── beanCount(self, path: str) -> file: .txt
+│       └── whole process
+├── getImgPath(self, path: str) -> img_paths: List[str]
+│       └── get pictures' path
+├── getTargetImg(self, img_path: str) -> rgb_img: nd.array()
+│       └── get cutted picture only with target
+├── edgeRGB2Binary(self, rgb_img: nd.array()) -> bi_img: nd.array()
+│       └── get binary img by edge detection 
+├── circleCount(self, bi_img: nd.array()) -> num: int
+│       └── get counted circle(pea)'s number by edge detected binary img
+├── hsvRGB2Binary(self, rgb_img: nd.array()) -> area: int
+│       └── get circle(pea)'s area by binary img converted by hsv
+├── bulidingModel(self, ?) -> ?
+│       └── ?
+├── runningModel(self, ?) -> ?
+│       └── ?
+└── exportOutput(self, ?) -> file: .txt
+        └── export output based on competition's rule
+</code></pre>
