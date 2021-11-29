@@ -67,23 +67,32 @@ scipy==1.6.3
 <code>
 Class BeanCount
 ├── __init__(self, path: str)       
-│       └── input pictures' folder path
+│       ├── self.path = path
+│       │     └── input pictures' folder path
+│       ├── self.res_df: pd.DataFrame
+│       │     └── df for binary img analysised data(circleCount,areaCount)
+│       ├── self.model: ?
+│       │     └── model for predicting count result of pea(bean)
+│       └── self.output_df: pd.DataFrame
+│             └── df for output
 ├── beanCount(self, path: str) -> file: .txt
 │       └── whole process
 ├── getImgPath(self, path: str) -> img_paths: List[str]
 │       └── get pictures' path
 ├── getTargetImg(self, img_path: str) -> rgb_img: nd.array()
 │       └── get cutted picture only with target
-├── edgeRGB2Binary(self, rgb_img: nd.array()) -> bi_img: nd.array()
+├── edgeRGB2Binary(self, rgb_img: nd.array()) -> edge_bi_img: nd.array()
 │       └── get binary img by edge detection 
-├── circleCount(self, bi_img: nd.array()) -> num: int
-│       └── get counted circle(pea)'s number by edge detected binary img
-├── hsvRGB2Binary(self, rgb_img: nd.array()) -> area: int
-│       └── get circle(pea)'s area by binary img converted by hsv
-├── bulidingModel(self, ?) -> ?
-│       └── ?
-├── runningModel(self, ?) -> ?
-│       └── ?
-└── exportOutput(self, ?) -> file: .txt
-        └── export output based on competition's rule
+├── circleCount(self, egde_bi_img: nd.array()) -> num: int
+│       └── get counted circle(pea)'s number by edge detected binary img and add to res_df
+├── hsvRGB2Binary(self, rgb_img: nd.array()) -> hsv_bi_img: nd.array()
+│       └── get binary img by hsv 
+├── areaCount(self, hsv_bi_img: nd.array()) -> area: int
+│       └── get counted circle(pea)'s area by binary img converted by hsv and add to res_df
+├── bulidingModel(self, self.res_df: pd.DataFrame) -> self.res_df: pd.DataFrame, model: ?
+│       └── building model by res_df
+├── runningModel(self, self.model: ?, self.res_df: pd.DataFrame, self.output_df: pd.DataFrame) -> self.output_df: pd.DataFrame
+│       └── running model and predict count result of pea(bean)
+└── exportOutput(self, self.output_df: pd.DataFrame) -> file: .txt
+        └── export output_df based on competition's rule
 </code></pre>
