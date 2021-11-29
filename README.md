@@ -91,10 +91,14 @@ scipy==1.6.3
 [img]
 
 ### 3.2. Evaluate Preprocessed Output
-- 3.1.2. RGB2Binary의 결과물들 count, area에 해당하는 데이터들을 res_df
+
 #### 3.2.1. Selecting && Concating Output
-### 3.2. Building Model
-### 3.3. Evaluate Model
+- 3.1.2. RGB2Binary의 결과물들 count, area에 해당하는 데이터들을 res_df에 정리하고 관찰한다. 
+
+### 3.3. Building Model
+- 3.2.1. res_df에 정리하고 관찰한다. 
+- 
+### 3.4. Running && Evaluate Model
 ----------
 ## 3. Code Structure
 <pre>
