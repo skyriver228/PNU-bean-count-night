@@ -13,11 +13,16 @@ if src is None:
 
 src_hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
 
-dst1 = cv2.inRange(src, (0, 128, 0), (100, 255, 100))
-dst2 = cv2.inRange(src_hsv, (50, 150, 0), (80, 255, 255))
+# dst1 = cv2.inRange(src, (0, 128, 0), (100, 255, 100))
+dst = cv2.inRange(src_hsv, (0, 20, 0), (60, 140, 255))
+
+cnt1, _ = cv2.connectedComponents(dst)
+dst2 = cv2.morphologyEx(dst, cv2.MORPH_OPEN, None)
+cnt2, _ = cv2.connectedComponents(dst2)
+
 
 cv2.imshow('src', src)
-cv2.imshow('dst1', dst1)
+# cv2.imshow('dst1', dst1)
 cv2.imshow('dst2', dst2)
 cv2.waitKey()
 
