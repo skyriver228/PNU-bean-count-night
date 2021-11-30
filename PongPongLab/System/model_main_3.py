@@ -25,7 +25,7 @@ def get_a_area(img_path, res_l):
     dst1 = cv2.inRange(src_hsv, (16, 13, 0), (80, 250, 255))
     dst2 = cv2.morphologyEx(dst1, cv2.MORPH_OPEN, None)
 
-    kernel = np.ones((5, 5), np.uint8)
+    kernel = np.ones((6, 6), np.uint8)
     closing = cv2.morphologyEx(dst2, cv2.MORPH_CLOSE,kernel, iterations = 15)
     bg = cv2.dilate(closing, kernel, iterations = 1)
     dist_transform = cv2.distanceTransform(closing, cv2.DIST_L2, 0)
