@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-import pandas as pd
+import matplotlib.pyplot as plt
 
 def get_s_area(img_path, res_l):
     src = cv2.imread(img_path)
@@ -38,7 +38,6 @@ f_l_4 = [i+f3_l[3] for i in pf_l]
 f_l_5 = [i+f3_l[4] for i in pf_l]
 
 dic = dict()
-df = pd.DataFrame()
 
 res_l_1 = []
 for i in f_l_1:
@@ -65,9 +64,32 @@ for i in f_l_5:
     get_a_area(i, res_l_5)
 dic["5"] = res_l_5
 
-res_count = pd.read_excel("./Open/Kong_Open_True.xlsx", skiprows=1)
-dic["count"] = list(res_count["amount"])
-# print([res_l_1[0], res_l_2[0], res_l_3[0], res_l_4[0], res_l_5[0], res_count[0]])
-data = pd.DataFrame.from_dict(dic)
-data["final"] = (data["1"] + data["2"] + data["3"] + data["4"])/4*0.6 + data["5"]*0.4
-print(data[["final", "count"]])
+# res_count = pd.read_excel("./Open/Kong_Open_True.xlsx", skiprows=1)
+f = open("count.txt", 'r')
+line = f.readline()
+count = line.split()
+f.close()
+dic["count"] = count
+# # print([res_l_1[0], res_l_2[0], res_l_3[0], res_l_4[0], res_l_5[0], res_count[0]])
+# data = pd.DataFrame.from_dict(dic)
+# data["final"] = (data["1"] + data["2"] + data["3"] + data["4"])/4*0.6 + data["5"]*0.4
+dic["final"] = dic["5"]
+
+x = dic["final"]
+y = [int(i) for i in dic["count"]]
+y.sort
+# print(y)
+# plt.plot(np.log(x),y,'o')
+
+linear_model=np.polyfit(x,y,3)
+f = open("para.txt", 'w')
+for i in range(len(linear_model)):
+    data = linear_model[i]
+    f.write(str(data)+" ")
+f.close()
+linear_model_fn=np.poly1d(linear_model)
+
+y_new = linear_model_fn(x)
+
+res = [100*abs(y_new[i]-y[i])/y[i]**2 for i in range(len(x))]
+print(sum(res))
