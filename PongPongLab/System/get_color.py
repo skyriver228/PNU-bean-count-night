@@ -1,6 +1,7 @@
 import os
 import sys
 import cv2
+import random
 import numpy as np
 
 # 디렉토리 파일 모두 읽기
