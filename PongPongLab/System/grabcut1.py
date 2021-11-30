@@ -4,7 +4,7 @@ import cv2
 
 
 # 입력 영상 불러오기
-input_img1 = "./Open/t25/1.jpg"
+input_img1 = "./Open/t25/5.jpg"
 src = cv2.imread(input_img1) 
 
 if src is None:
@@ -13,8 +13,10 @@ if src is None:
 
 # 사각형 지정을 통한 초기 분할
 rc = cv2.selectROI(src)
+#(621, 221, 2988, 2624)
 print(rc)
 mask = np.zeros(src.shape[:2], np.uint8)
+
 
 cv2.grabCut(src, mask, rc, None, None, 5, cv2.GC_INIT_WITH_RECT)
 
