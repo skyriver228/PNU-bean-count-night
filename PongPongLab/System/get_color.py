@@ -4,14 +4,14 @@ import cv2
 import numpy as np
 
 # 디렉토리 파일 모두 읽기
-path = "../../capture"
+path = "./capture"
 file_lst = os.listdir(path)
 print(file_lst)
 
-for file in file_lst:
-    filepath = path + '/' + file
+# for file in file_lst:
+#     filepath = path + '/' + file
 
-img = cv2.imread(path[0])
+img = cv2.imread(path + '/' + file_lst[0])
 if img is None:
     print('Image load failed!')
     sys.exit()
