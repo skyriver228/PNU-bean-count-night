@@ -5,6 +5,7 @@ import time
 import datetime as dt
 
 def get_a_area(img_path, res_l):
+    print(len(res_l))
     src=cv2.imread(img_path)
     rc = (975, 909, 2555, 999)
     src = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
@@ -34,7 +35,7 @@ res_l_5 = []
 for i in f_l_5:
     get_a_area(i, res_l_5)
 
-f = open("count.txt", 'r')
+f = open("./01/System/count.txt", 'r')
 line = f.readline()
 count = line.split()
 f.close()
@@ -61,7 +62,7 @@ y_new = linear_model_fn(new_x)
 
 d = dt.datetime.now()
 
-f = open("Kong_pongpong.txt", 'w')
+f = open("./01/Out/Kong_01.txt", 'w')
 f.write("%Team  PongPongLab\n")
 date = "%Date  " + f"{d.month}-{d.day}-{d.hour}-{d.minute}-{d.second}"+"\n"
 f.write(date)
