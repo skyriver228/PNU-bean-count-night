@@ -44,12 +44,8 @@ class BeanCount:
         for img_path in image_path_list:
             src=cv2.imread(img_path)
             dst = self.getAboveTargetImg(src)
-            src_hsv = cv2.cvtColor(dst, cv2.COLOR_BGR2HSV)
-
-                # dst1 = cv2.inRange(src, (0, 128, 0), (100, 255, 100))
-            dst1 = cv2.inRange(src_hsv, (16, 13, 0), (80, 250, 255))
+            dst1 = self.hsvRGB2Binary(dst)
             dst2 = cv2.morphologyEx(dst1, cv2.MORPH_OPEN, None)
-
             kernel = np.ones((6, 6), np.uint8)
             closing = cv2.morphologyEx(dst2, cv2.MORPH_CLOSE,kernel, iterations = 15)
             bg = cv2.dilate(closing, kernel, iterations = 1)
@@ -63,6 +59,13 @@ class BeanCount:
         rc = (975, 909, 2555, 999)
         dst = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
         return dst
+
+    
+    def hsvRGB2Binary(self, src):
+        src_hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
+        dst1 = cv2.inRange(src_hsv, (16, 13, 0), (80, 250, 255))
+        return dst1
+
 
     def getErrorRate(self):
         y = self.label
