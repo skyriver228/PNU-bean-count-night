@@ -63,12 +63,12 @@ y_new = linear_model_fn(new_x)
 d = dt.datetime.now()
 
 f = open("./01/Out/Kong_01.txt", 'w')
-f.write("%Team  PongPongLab\n")
-date = "%Date  " + f"{d.month}-{d.day}-{d.hour}-{d.minute}-{d.second}"+"\n"
+f.write("Team  PongPongLab\n")
+date = "Date  " + f"{d.month}-{d.day}-{d.hour}-{d.minute}-{d.second}"+"\n"
 f.write(date)
-t = "%Time  "+str(round(time.time() - start,2))+"\n"
+t = "Time  "+str(round(time.time() - start,2))+"\n"
 f.write(t)
-c = "%Cases "+str(len(res_l_5))+"\n"
+c = "Cases "+str(len(res_l_5))+"\n"
 f.write(c)
 for i in range(len(y_new)):
     data = y_new[i]
