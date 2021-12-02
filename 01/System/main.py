@@ -19,7 +19,7 @@ class BeanCount:
         self.export_file_path = export_file_path
 
 
-    def countingBean(self):
+    def fast_countingBean(self):
         self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
         self.start_time = dt.datetime.now()
         o_image_path_list = self.getImagePath("./Open")
@@ -138,7 +138,7 @@ class BeanCount:
 
 def main():
     bc = BeanCount("./01/Out/Kong_01.txt")
-    bc.countingBean()
+    bc.fast_countingBean()
 
 if __name__ == "__main__":
     main()
