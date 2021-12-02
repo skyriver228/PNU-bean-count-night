@@ -8,12 +8,13 @@ class BeanCount:
         self.image_l = [f"/{i}.jpg" for i in range(1,6)]
         self.option = 0
         self.image_path_list = []
-        self.count_label_path = "./01/System/count.txt"
+        self.open_count_label_path = "./01/System/count_open.txt"
         self.start_time = 0
         self.end_time = 0
         self.label = []
         self.count_res = []
         self.linear_model_fn = None
+        self.close_count_label_path = "./01/System/count_close.txt"
         self.export_file_path = export_file_path
 
 
@@ -23,7 +24,7 @@ class BeanCount:
         self.start_time = dt.datetime.now()
         o_image_path_list = self.getImagePath("./Open")
         o_image_pixel_count_list = self.getAboveArea(o_image_path_list)
-        self.fittingModel(o_image_pixel_count_list, self.count_label_path)
+        self.fittingModel(o_image_pixel_count_list, self.open_count_label_path)
         self.modelResult()
         self.end_time = dt.datetime.now()
         self.exportingOutput()
