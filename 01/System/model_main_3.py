@@ -16,7 +16,7 @@ def get_s_area(img_path, res_l):
 
 def get_a_area(img_path, res_l):
     src=cv2.imread(img_path)
-    rc = (975, 909, 2555, 999)
+    rc = (621, 221, 2988, 2624)
     src = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
     dst = src
     src_hsv = cv2.cvtColor(dst, cv2.COLOR_BGR2HSV)
@@ -71,7 +71,7 @@ for i in f_l_5:
 dic["5"] = res_l_5
 
 # res_count = pd.read_excel("./Open/Kong_Open_True.xlsx", skiprows=1)
-f = open("count.txt", 'r')
+f = open("./01/System/count.txt", 'r')
 line = f.readline()
 count = line.split()
 f.close()

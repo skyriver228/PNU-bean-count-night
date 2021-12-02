@@ -11,20 +11,23 @@ class BeanCount:
         self.count_label_path = "./01/System/count.txt"
         self.start_time = 0
         self.end_time = 0
+        self.label = []
         self.count_res = []
         self.linear_model_fn = None
         self.export_file_path = export_file_path
 
 
     def countingBean(self):
-        self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
+        # self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
+        self.option = 5
         self.start_time = dt.datetime.now()
         o_image_path_list = self.getImagePath("./Open")
-        o_image_pixel_count_list = self.get_above_area(o_image_path_list)
+        o_image_pixel_count_list = self.getAboveArea(o_image_path_list)
         self.fittingModel(o_image_pixel_count_list, self.count_label_path)
         self.modelResult()
         self.end_time = dt.datetime.now()
         self.exportingOutput()
+        self.getErrorRate()
          
 
     # path = "./Open" or "./Hidden"
@@ -36,13 +39,11 @@ class BeanCount:
         return image_path_list
 
 
-    def get_above_area(self, image_path_list):
+    def getAboveArea(self, image_path_list):
         image_pixel_count_list = []
         for img_path in image_path_list:
             src=cv2.imread(img_path)
-            rc = (975, 909, 2555, 999)
-            src = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
-            dst = src
+            dst = self.getAboveTargetImg(src)
             src_hsv = cv2.cvtColor(dst, cv2.COLOR_BGR2HSV)
 
                 # dst1 = cv2.inRange(src, (0, 128, 0), (100, 255, 100))
@@ -58,13 +59,27 @@ class BeanCount:
         return image_pixel_count_list
 
 
+    def getAboveTargetImg(self, src):
+        rc = (975, 909, 2555, 999)
+        dst = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
+        return dst
+
+    def getErrorRate(self):
+        y = self.label
+        y_new = self.count_res
+        n = len(y_new)
+        err1 = [100*abs(y_new[i]-y[i])/y[i]**2 for i in range(n)]
+        print(sum(err1)) 
+        err2 = [100*abs(y_new[i]-y[i])/y[i]*2 for i in range(n)]
+        print(sum(err2)) 
+
     def fittingModel(self, x, y):
         f = open(y, 'r')
         line = f.readline()
         count = line.split()
         f.close()
         y = [int(i) for i in count]
-
+        self.label = y
         linear_model=np.polyfit(x,y,3)
         self.linear_model_fn=np.poly1d(linear_model)
 
@@ -73,7 +88,7 @@ class BeanCount:
         # Hidden data를 제공받지 않아 일단 Open으로 진행
         # h_image_path_list = self.getImagePath("./Hidden")
         h_image_path_list = self.getImagePath("./Open")
-        h_image_pixel_count_list = self.get_above_area(h_image_path_list)
+        h_image_pixel_count_list = self.getAboveArea(h_image_path_list)
         self.count_res = self.linear_model_fn(h_image_pixel_count_list)
 
 
