@@ -37,7 +37,7 @@ scipy==1.7.3
 ## 2. 파일 구조
 <pre>
 <code>
-├── Hiden: test data          
+├── Hidden: test data          
 │       └── t00   
 │             └── 1~4.jpg : 동서남북 방향
 │             └── 5.jpg : 위 방향
@@ -45,10 +45,12 @@ scipy==1.7.3
 │       └── t00   
 │             └── 1~4.jpg : 동서남북 방향
 │             └── 5.jpg : 위 방향
-└── PongPongLab         
-        └── Out  
-              └── Kong_PongPongLab.txt : Output data
+└── PongPongLab(01)         
+        ├── Out  
+        │     └── Kong_01.txt : Output data
         └── System
+              ├── data : Hidden, Open의 
+              ├── idea  
               └── main.py
 </code></pre>
 ----------

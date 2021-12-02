@@ -84,9 +84,9 @@ class BeanCount:
         y = [int(i) for i in count]
         y_new = self.count_res
         n = len(y_new)
-        err1 = [100*abs(y_new[i]-y[i])/y[i]**2 for i in range(n)]
+        err1 = [(100*abs(y_new[i]-y[i])/y[i])**2 for i in range(n)]
         print(sum(err1)) 
-        err2 = [100*abs(y_new[i]-y[i])/y[i]*2 for i in range(n)]
+        err2 = [100*abs(y_new[i]-y[i])/y[i] for i in range(n)]
         print(sum(err2)) 
 
 
