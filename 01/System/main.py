@@ -20,8 +20,7 @@ class BeanCount:
 
 
     def countingBean(self):
-        # self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
-        self.option = 5
+        self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
         self.start_time = dt.datetime.now()
         o_image_path_list = self.getImagePath("./Open")
         o_image_pixel_count_list = self.getAboveArea(o_image_path_list)
@@ -45,7 +44,7 @@ class BeanCount:
         image_pixel_count_list = []
         for img_path in image_path_list:
             src=cv2.imread(img_path)
-            dst = self.getAboveTargetImg(src)
+            dst = self.getAboveTargetImg(src) if self.option==5 else self.getSideTargetImg(src)
             dst1 = self.hsvRGB2Binary(dst)
             fg = self.erasingNoise(dst1)
             image_pixel_count_list.append(sum(sum(fg)))
@@ -53,6 +52,12 @@ class BeanCount:
 
 
     def getAboveTargetImg(self, src):
+        rc = (621, 221, 2988, 2624)
+        dst = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
+        return dst
+
+
+    def getSideTargetImg(self, src):
         rc = (975, 909, 2555, 999)
         dst = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
         return dst
