@@ -45,12 +45,7 @@ class BeanCount:
             src=cv2.imread(img_path)
             dst = self.getAboveTargetImg(src)
             dst1 = self.hsvRGB2Binary(dst)
-            dst2 = cv2.morphologyEx(dst1, cv2.MORPH_OPEN, None)
-            kernel = np.ones((6, 6), np.uint8)
-            closing = cv2.morphologyEx(dst2, cv2.MORPH_CLOSE,kernel, iterations = 15)
-            bg = cv2.dilate(closing, kernel, iterations = 1)
-            dist_transform = cv2.distanceTransform(closing, cv2.DIST_L2, 0)
-            ret, fg = cv2.threshold(dist_transform, 0.02*dist_transform.max(), 255, 0)
+            fg = self.erasingNoise(dst1)
             image_pixel_count_list.append(sum(sum(fg)))
         return image_pixel_count_list
 
@@ -67,6 +62,18 @@ class BeanCount:
         return dst1
 
 
+    def erasingNoise(self, dst1):
+        # mopology 
+        dst2 = cv2.morphologyEx(dst1, cv2.MORPH_OPEN, None)
+        # seper
+        kernel = np.ones((6, 6), np.uint8)
+        closing = cv2.morphologyEx(dst2, cv2.MORPH_CLOSE,kernel, iterations = 15)
+        bg = cv2.dilate(closing, kernel, iterations = 1)         
+        dist_transform = cv2.distanceTransform(closing, cv2.DIST_L2, 0)
+        ret, fg = cv2.threshold(dist_transform, 0.02*dist_transform.max(), 255, 0)
+        return fg
+
+
     def getErrorRate(self):
         y = self.label
         y_new = self.count_res
@@ -75,6 +82,7 @@ class BeanCount:
         print(sum(err1)) 
         err2 = [100*abs(y_new[i]-y[i])/y[i]*2 for i in range(n)]
         print(sum(err2)) 
+
 
     def fittingModel(self, x, y):
         f = open(y, 'r')
@@ -117,6 +125,7 @@ class BeanCount:
             f_d = str(self.test_l[i][1:])+"  "+str(round(data,3))+"\n"
             f.write(f_d)
         f.close()
+
 
 def main():
     bc = BeanCount("./01/Out/Kong_01.txt")
