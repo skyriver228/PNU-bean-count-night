@@ -11,10 +11,11 @@ class BeanCount:
         self.open_count_label_path = "./01/System/count_open.txt"
         self.start_time = 0
         self.end_time = 0
-        self.label = []
+        self.open_label = []
+        self.hidden_label = []
         self.count_res = []
         self.linear_model_fn = None
-        self.close_count_label_path = "./01/System/count_close.txt"
+        self.hidden_count_label_path = "./01/System/count_hidden.txt"
         self.export_file_path = export_file_path
 
 
@@ -76,7 +77,11 @@ class BeanCount:
 
 
     def getErrorRate(self):
-        y = self.label
+        f = open(self.hidden_count_label_path, 'r')
+        line = f.readline()
+        count = line.split()
+        f.close()
+        y = [int(i) for i in count]
         y_new = self.count_res
         n = len(y_new)
         err1 = [100*abs(y_new[i]-y[i])/y[i]**2 for i in range(n)]
@@ -91,15 +96,13 @@ class BeanCount:
         count = line.split()
         f.close()
         y = [int(i) for i in count]
-        self.label = y
+        self.open_label = y
         linear_model=np.polyfit(x,y,3)
         self.linear_model_fn=np.poly1d(linear_model)
 
 
     def modelResult(self):
-        # Hidden data를 제공받지 않아 일단 Open으로 진행
-        # h_image_path_list = self.getImagePath("./Hidden")
-        h_image_path_list = self.getImagePath("./Open")
+        h_image_path_list = self.getImagePath("./Hidden")
         h_image_pixel_count_list = self.getAboveArea(h_image_path_list)
         self.count_res = self.linear_model_fn(h_image_pixel_count_list)
 
