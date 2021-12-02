@@ -5,10 +5,12 @@
     👉 input: 콩이 담겨져 있는 사진(동서남북, 위)   
     👉 output: 담겨져 있는 콩의 개수
 
-    👉 21년도 대회 회고: error 식을 잘못 세워 피팅 방향성을 잘못 잡았었음...
-    👉 result
-        👉 Error1(square): 76660.25443252905
-        👉 Error2        : 1022.9702061451912
+    👉 21년도 대회 회고: error 식을 잘못 세워 피팅 방향성을 잘못 잡았었음...    
+    👉 result    
+    - Error1(square): 76660.25443252905  
+    - Error2        : 1022.9702061451912     
+
+------- 
 
 - team PongPongLab
     - [성강(skyriver)](https://github.com/skyriver228)
