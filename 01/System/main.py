@@ -8,14 +8,14 @@ class BeanCount:
         self.image_l = [f"/{i}.jpg" for i in range(1,6)]
         self.option = 0
         self.image_path_list = []
-        self.open_count_label_path = "./01/System/count_open.txt"
+        self.open_count_label_path = "./01/System/data/count_open.txt"
         self.start_time = 0
         self.end_time = 0
         self.open_label = []
         self.hidden_label = []
         self.count_res = []
         self.linear_model_fn = None
-        self.hidden_count_label_path = "./01/System/count_hidden.txt"
+        self.hidden_count_label_path = "./01/System/data/count_hidden.txt"
         self.export_file_path = export_file_path
 
 
