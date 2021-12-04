@@ -1,5 +1,8 @@
 import numpy as np
 import cv2
+
+import numpy as np
+import cv2
 import datetime as dt
 
 class BeanCount:
@@ -20,7 +23,8 @@ class BeanCount:
 
 
     def fast_countingBean(self):
-        self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
+        # self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
+        self.option = 5
         self.start_time = dt.datetime.now()
         o_image_path_list = self.getImagePath("./Open")
         o_image_pixel_count_list = self.getArea(o_image_path_list)
@@ -138,7 +142,19 @@ class BeanCount:
 
 def main():
     bc = BeanCount("./01/Out/Kong_01.txt")
-    bc.fast_countingBean()
+    img_path = './Open/t28/5.jpg'
+    src=cv2.imread(img_path)
+    dst = bc.getAboveTargetImg(src) if bc.option==5 else bc.getSideTargetImg(src)
+    dst1 = bc.hsvRGB2Binary(dst)
+    fg = bc.erasingNoise(dst1)
+
+    cv2.imshow('src', src)
+    cv2.imshow('dst', dst)
+    cv2.imshow('dst2', dst1)
+    cv2.imshow('fg', fg)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+    #
 
 if __name__ == "__main__":
     main()
