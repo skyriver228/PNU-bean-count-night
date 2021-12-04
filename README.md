@@ -6,7 +6,7 @@
     👉 output: 담겨져 있는 콩의 개수
 
     👉 21년도 대회 회고  
-    [img]
+    ![img](./img_src/wrong_error.PNG)
     - error 식을 잘못 세워 피팅 방향성을 잘못 잡았었음...      
 
     👉 result    
@@ -24,6 +24,7 @@
 1. [환경](#1-환경)
 2. [파일 구조](#2-파일-구조)
 3. [Algorithm Flow](#3-Algorithm-Flow)
+4. [고찰](#4-고찰)
 -----------
 ## 1. 환경
 👉 OS : Windows 10  
@@ -159,5 +160,9 @@ scipy==1.7.3
 > BeanCount.getErrorRate(self)  
 
 ![img](./img_src/error_output.PNG)
-- self.count_res에 저장된 값과 실제 Hidden data의 결과값과 비교한다.   
+- self.count_res에 저장된 값과 실제 Hidden data의 결과값과 비교한다. 
+
+![img](./img_src/error.PNG)
 - 수식은 위와 같다.
+
+## 4. 고찰
