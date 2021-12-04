@@ -162,7 +162,7 @@ scipy==1.7.3
 ![img](./img_src/error_output.PNG)
 - self.count_res에 저장된 값과 실제 Hidden data의 결과값과 비교한다. 
 
-![img](./img_src/error.PNG)
+![img](./img_src/error.png)
 - 수식은 위와 같다.
 
 ## 4. 고찰
