@@ -141,6 +141,11 @@ scipy==1.7.3
 - 시간이 조금만 더 있었다면 이 알고리즘에 대한 추가적인 공부를 통해 vanila의 관점에서 접근하여 제한 시간 내로 output이 나올 수 있도록 tunning 했었으면 하는 바램이 있었다. 
 
 ### 3.2. Building Model
-- 3.2.1. res_df에 정리하고 관찰한다. 
-- 
+> BeanCount.fittingModel(self, x, y) -> linear_model_fn: tuple
+- np.polyfit을 활용하여 counted area data와 labeled data를 regression으로 접근한다.
+
 ### 3.4. Running && Evaluate Model
+#### 3.4.1. Running Model
+> BeanCount.hsvRGB2Binary(self, src: np.2darray) -> dst: np.2darray
+#### 3.4.2. Evaluate Model
+> BeanCount.hsvRGB2Binary(self, src: np.2darray) -> dst: np.2darray
