@@ -65,8 +65,8 @@ class BeanCount:
     
     def hsvRGB2Binary(self, src):
         src_hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
-        dst1 = cv2.inRange(src_hsv, (16, 13, 0), (80, 250, 255))
-        return dst1
+        dst = cv2.inRange(src_hsv, (16, 13, 0), (80, 250, 255))
+        return dst
 
 
     def erasingNoise(self, dst1):

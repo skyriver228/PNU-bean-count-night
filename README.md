@@ -58,8 +58,8 @@ scipy==1.7.3
         ├── Out  
         │     └── Kong_01.txt : Output data
         └── System
-              ├── data : Hidden, Open의 
-              ├── idea  
+              ├── data : Hidden, Open의 label .txt data
+              ├── idea : main.py를 작성하기 위해 겪은 모든 코드들의 조각
               └── main.py
 </code></pre>
 ----------
@@ -69,25 +69,30 @@ scipy==1.7.3
 - 전체적인 전처리 과정을 통한 결과물은 아래와 같다. 
     1. rgb img
     2. binary img
-    3. count and area data
+    3. area data
+    4. counted data
 #### 3.1.1. Get target img
-> BeanCount.getImgPath(self, path: str) -> img_paths: List[str]  
+> BeanCount.getAboveTargetImg(self, src:np.2darray) -> dst: np.2darray   
+> BeanCount.getSideTargetImg(self, src:np.2darray) -> dst: np.2darray 
 
 [img]
 - 모든 부분을 사용할 필요는 없으며, 외부에 보이는 환경에 "원"으로 볼 수 있는 요소가 있으므로 필요부분(target)만을 잘라내 준다. 
+- 단, 본 대회에서는 1~4.jpg는 동서남북에서 바라본 사진이고, 5.jpg는 위에서 바라본 사진이기 때문에 잘라내야 하는 부분이 달라서 다르게 처리했다. 
+    - getSideTargetImg
+        - 1~4.jpg
+    - getAboveTargetImg
+        - 5.jpg
+
 #### 3.1.2. RGB2Binary
-- 크게 2가지 방법을 사용하여 2가지 다른 데이터를 얻어서 사용하고자 한다.   
+- 크게 2가지 방법을 고민했다.   
+    👉 edge detection 기반의 원 추출  
+    👉 hsv field를 사용한 콩의 영역 추출
 
-👉 edge detection
-> edgeRGB2Binary(self, rgb_img: nd.array()) -> edge_bi_img: nd.array() 
-- edge detection을 활용하여 rgb → binary 를 진행한다. 
-> circleCount(self, egde_bi_img: nd.array()) -> num: int
-- edge detection 결과물인 binary img를 활용하여 binary → circle count를 진행한다. 
 
-[img]
+- 하지만 2~1600개까지의 제한이 있는 본 대회에서 겹쳐진 부분에 대한 콩(원) 추출이 잘 되지 않았으며, 독립적이다고 보기에는 문제가 있었기 때문에 더 강력한 성능을 보인 "hsv field를 사용한 콩의 영역 추출 방법"을 사용하였다.
 
-👉 hsv
-> hsvRGB2Binary(self, rgb_img: nd.array()) -> hsv_bi_img: nd.array() 
+👉 hsv field를 사용한 콩의 영역 추출
+> BeanCount.hsvRGB2Binary(self, src:np.2darray) -> dst: np.2darray
 - hsv를 활용하여 rgb → binary 를 진행한다. 
 > areaCount(self, hsv_bi_img: nd.array()) -> area: int
 - hsv 결과물인 binary img를 활용하여 binary → area counting(white space = bean space)를 진행한다. 
