@@ -108,7 +108,7 @@ class BeanCount:
 
     def modelResult(self):
         h_image_path_list = self.getImagePath("./Hidden")
-        h_image_pixel_count_list = self.getAboveArea(h_image_path_list)
+        h_image_pixel_count_list = self.getArea(h_image_path_list)
         self.count_res = self.linear_model_fn(h_image_pixel_count_list)
 
 
