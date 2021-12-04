@@ -23,7 +23,7 @@ class BeanCount:
         self.option = int(input("input number of target __.jpg(select one from 1,2,3,4,5: "))
         self.start_time = dt.datetime.now()
         o_image_path_list = self.getImagePath("./Open")
-        o_image_pixel_count_list = self.getAboveArea(o_image_path_list)
+        o_image_pixel_count_list = self.getArea(o_image_path_list)
         self.fittingModel(o_image_pixel_count_list, self.open_count_label_path)
         self.modelResult()
         self.end_time = dt.datetime.now()
@@ -40,7 +40,7 @@ class BeanCount:
         return image_path_list
 
 
-    def getAboveArea(self, image_path_list):
+    def getArea(self, image_path_list):
         image_pixel_count_list = []
         for img_path in image_path_list:
             src=cv2.imread(img_path)
@@ -69,10 +69,10 @@ class BeanCount:
         return dst
 
 
-    def erasingNoise(self, dst1):
+    def erasingNoise(self, src):
         # mopology 
-        dst2 = cv2.morphologyEx(dst1, cv2.MORPH_OPEN, None)
-        # seper
+        dst2 = cv2.morphologyEx(src, cv2.MORPH_OPEN, None)
+        # segmentation
         kernel = np.ones((6, 6), np.uint8)
         closing = cv2.morphologyEx(dst2, cv2.MORPH_CLOSE,kernel, iterations = 15)
         bg = cv2.dilate(closing, kernel, iterations = 1)         
