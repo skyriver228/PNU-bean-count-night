@@ -146,6 +146,12 @@ scipy==1.7.3
 
 ### 3.4. Running && Evaluate Model
 #### 3.4.1. Running Model
-> BeanCount.hsvRGB2Binary(self, src: np.2darray) -> dst: np.2darray
+> BeanCount.modelResult(self)
+- Hidden data를 같은 방법으로 preprcessing을 진행하고 그 결과를 model에 넣어 결과물을 얻는다. 
+> self.count_res
+- 결과물을 self.count_res에 저장된다. 
 #### 3.4.2. Evaluate Model
-> BeanCount.hsvRGB2Binary(self, src: np.2darray) -> dst: np.2darray
+> BeanCount.getErrorRate(self)
+- self.count_res에 저장된 값과 실제 Hidden data의 결과값과 비교한다.   
+[!img]()
+- 수식은 위와 같다.
