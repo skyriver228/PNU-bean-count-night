@@ -64,7 +64,8 @@ scipy==1.7.3
         └── System
               ├── data : Hidden, Open의 label .txt data
               ├── idea : main.py를 작성하기 위해 겪은 모든 코드들의 조각
-              └── main.py
+              ├── competition_main.py: 대회에 제출한 최종 코드
+              └── main.py: 객체화 진행한 코드
 </code></pre>
 ----------
 ## 3. Algorithm Flow
