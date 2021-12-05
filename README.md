@@ -7,7 +7,8 @@
 
     👉 21년도 대회 회고  
     ![img](./img_src/wrong_error.PNG)
-    - error 식을 잘못 세워 피팅 방향성을 잘못 잡았었음...      
+    - error 식을 잘못 세워 피팅 방향성을 잘못 잡았었음...    
+    - 근데, 이렇게 접근한 방법이 결론적으로는 가장 낮은 Error2값을 나타냈다.  
 
     👉 result    
     - Error1(square): 76660.25443252905  
@@ -159,18 +160,43 @@ scipy==1.7.3
 - 결과물을 self.count_res에 저장된다. 
 #### 3.4.2. Evaluate Model
 > BeanCount.getErrorRate(self)  
+- self.count_res에 저장된 값과 실제 Hidden data의 결과값과 비교한다. 
+- 이론으로 맞춰서 한 결과
+    - 1,2,3,4.jpg → getSideTargetImg
+    - 5.jpg → getAboveTargetImg  
 
 ![img](./img_src/error_output.PNG)
-- self.count_res에 저장된 값과 실제 Hidden data의 결과값과 비교한다. 
+
+- 5.jpg → getSideTargetImg한 결과
+ 
+![img](./img_src/error_output_1.PNG)
+
+- 수식은 아래와 같다.  
 
 ![img](./img_src/error.png)
-- 수식은 위와 같다.
 
 ## 4. 고찰
-- error 식을 잘못보고 대회를 진행해서 너무 뼈아픈 실수라는 생각이 크게 든다. 
+- error 식을 잘못보고 대회를 진행했지만, 그렇게 접근한 결과값이 본 알고리즘 flow로 접근했을 때, 가장 작은 데이터 값이라는 것이 신기했다.    
+
 ![img](./img_src/result.PNG)
--  위와 같이 나왔기에 충분한 성능을 보일 것이라 기대했지만, 알맞은 피팅과정을 거친 후에도 원하는 수준으로 결과가 나오지는 않았다. (300000..)
-- hsv field로 접근했기 때문에, 그 값을 찾는 과정이라던가, noise제거 filter의 적당 크기를 찾는 것은 일일히 할 수 없었다. 이 부분을 인공지능, 특히 cnn으로 접근할 수 없을까라는 생각을 하게 되었다. 
+-  위와 같이 나왔기에 충분히 모델이 성능을 보일 것이라 기대했지만,  원하는 수준으로 결과가 나오지는 않았다. (70000..)  
+
+![img](./img_src/final.PNG)  
+
+- 이론대로 접근한 가설과는 다르게, getAboveArea에 해당하는 부분을 getSideArea로 접근하여 5.jpg를 접근했을 때, 가장 적은 값이 나온 것을 확인할 수 있었다.  
+
+    👉 result    
+    - Error1(square): 76660.25443252905  
+    - Error2        : 1022.9702061451912  
+    - time          : 8sec     
+
+- 이 부분 때문에, 우리가 하고 있는 부분이 결국 CNN과 같은 부분이 아닌가라는 생각을 하게 되었다.
+    - 이론상 타겟으로 하는 부분은 getAboveArea에서 선언한 부분이지만, getSideArea로 접근한 부분이 본 코드에서 작성한 방법으로는 더욱 높은 정확도를 보였기 때문에, 변수가 많은 상황에서는 물론 이론상으로 접근하는 방법도 필요하지만, 데이터 상으로 접근하는 것의 비중을 높여야 하는 필요성을 느낄 수 있었다.
+    - 그런 점에서 CNN이 큰 강점을 가질 수 있었다.  
+
+![img](./img_src/CNN.PNG)  
+- [출처](http://taewan.kim/post/cnn/)
+- 위와 같은 이유를 배제하고서도 hsv field로 접근했기 때문에, 그 값을 찾는 과정이라던가, noise제거 filter의 적당 크기를 찾는 것은 일일히 할 수 없었다. 이 부분을 인공지능, 특히 CNN으로 접근할 수 없을까라는 생각을 하게 되었다. 
     - 즉, 현재 우리가 접근한 방식이 결국은 CNN에서 convolution filter weight를 정하는 과정이라는 생각이 들었다. 
     - 원하는 구역만을 추출하고, 각 픽셀에 알맞은 weight를 주고 threshold를 기준으로 binary image로 처리하고 regression하는 과정으로 단순화해서 생각할 수 있기 때문이다. 
 - 발전 방향성

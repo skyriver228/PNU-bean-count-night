@@ -53,7 +53,8 @@ class BeanCount:
 
 
     def getAboveTargetImg(self, src):
-        rc = (621, 300, 2988, 2700)
+        # rc = (621, 300, 2988, 2700)
+        rc = (975, 909, 2555, 999)
         dst = src[rc[1]:rc[1]+rc[3], rc[0]:rc[0]+rc[2]]
         return dst
 
