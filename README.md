@@ -113,7 +113,10 @@ scipy==1.7.3
     👉 image segmatation  
 
 
-👉 morphology  
+👉 morphology    
+
+![img](./img_src/morphology.PNG)  
+
 - 영상을 형태학적인 측면에서 다루는 방법이다.
 - 열기(Opening) 연산: 침식(Erosion) → 팽창(Dilation) 으로 노이즈를 제거한다.  
     - 작은 돌기,작은 객체가 사라지고 얇은 연결선이 끊어진다.  
@@ -141,12 +144,14 @@ scipy==1.7.3
 - 최종적으로 noise가 지워진 nd.2darray(binary image)의 sum을 구하면 되므로 따로 함수화 하지 않고 getArea에서 구현했다.
 
 #### 3.1.5. grabcut
-![img](./img_src/grabcut.PNG)
+![img](./img_src/grabcut_ex.PNG)
 - 구현했다가 시간 제한때문에 사용하지 못한 코드이자 기법이다. 
 - 그래프 컷 (graph cut) 기반 영역 분할 알고리즘
 - 영상의 픽셀을 그래프 정점으로 간주하고
 픽셀들을 두 개의 그룹으로 나누는 최적의
-컷 (Max Flow Minimum Cut) 을 찾는 방식
+컷 (Max Flow Minimum Cut) 을 찾는 방식  
+
+![img](./img_src/grabcut.PNG)
 - 시간이 조금만 더 있었다면 이 알고리즘에 대한 추가적인 공부를 통해 vanila의 관점에서 접근하여 제한 시간 내로 output이 나올 수 있도록 tunning 했었으면 하는 바램이 있었다. 
 
 ### 3.2. Building Model
@@ -208,4 +213,4 @@ scipy==1.7.3
     - grabcut을 vanila 수준으로 접근해 뜯어내서 더욱 빠른 속도로 해당 알고리즘을 돌릴 수 없을까에 대한 고찰도 필요할 것이라 생각 
     - 마찬가지로 주어진 library만을 가지고 CNN을 직접하나하나 짜보는 것도 다음에는 가능할 정도로 실력을 키우고 싶다.
 
-- 마지막으로, 개인적으로 도전과제였던 객체화 부분은 나름대로 진행하기는 하였지만, 아직 부족한 부분이 많은 것 같다. 더 나은 방향에 대해 코멘트 해주시면 맞추어 계속해서 update하도록 하겠다.
+- 마지막으로, 개인적으로 도전과제였던 객체화 부분은 나름대로 진행하기는 하였지만, 아직 부족한 부분이 많은 것 같다. 더 나은 방향으로 꾸준히 update하도록 하겠다.
