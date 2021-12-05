@@ -29,7 +29,7 @@ f3_l = [f"/{i}.jpg" for i in range(1,6)]
 
 pf_l = [f1_l+i for i in f2_l]
 f_l_5 = [i+f3_l[4] for i in pf_l]
-
+print(f_l_5)
 res_l_5 = []
 for i in f_l_5:
     get_a_area(i, res_l_5)
