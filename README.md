@@ -124,7 +124,7 @@ scipy==1.7.3
     - 작은 돌기,작은 객체가 사라지고 얇은 연결선이 끊어진다.  
  
 
-👉 image segmatation 
+👉 image segmentation 
 - [refer link](https://www.askpython.com/python/examples/image-segmentation)
 - 단계는 아래와 같다.
     1. closing(morphology)
